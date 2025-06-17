@@ -230,12 +230,11 @@ extension InjectorV3 {
         }
 
         guard let executableName = FileManager.default.fileExists(atPath: bundleURL.appendingPathComponent("Frameworks/UnityFramework.framework/UnityFramework").path)
-            ? "Frameworks/UnityFramework.framework/UnityFramework"
+            ? Optional("Frameworks/UnityFramework.framework/UnityFramework")
             : infoPlist["CFBundleExecutable"] as? String
         else {
             throw Error.generic("Unable to determine executable name.")
         }
-
 
         let executableURL = target.appendingPathComponent(executableName)
         guard FileManager.default.fileExists(atPath: executableURL.path) else {
